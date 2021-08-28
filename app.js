@@ -22,8 +22,12 @@ app.use(express.json())
 
 // Load routers
 const userRouter = require('./src/routers/user.router')
+const ticketRouter = require('./src/routers/ticket.router')
 
-// Routers
+//Use Routers
+app.use('/v1/user', userRouter)
+app.use('/v1/ticket', ticketRouter)
+
 app.use('/', (req, res, next) => {
   res.json({ message: 'hi there guys!' })
 })
