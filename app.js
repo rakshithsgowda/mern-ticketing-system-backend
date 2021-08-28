@@ -28,8 +28,17 @@ const ticketRouter = require('./src/routers/ticket.router')
 app.use('/v1/user', userRouter)
 app.use('/v1/ticket', ticketRouter)
 
-app.use('/', (req, res, next) => {
-  res.json({ message: 'hi there guys!' })
+// Error handler
+const handleError = require('./src/utils/errorHandler')
+
+app.use('*', (req, res, next) => {
+  const error = new Error('Resource you are looking for is not found')
+  error.status = 404
+  next(error)
+})
+
+app.use('*', (error, req, res, next) => {
+  handleError(error, res)
 })
 
 app.listen(port, () => {
