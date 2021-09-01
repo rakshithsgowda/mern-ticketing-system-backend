@@ -1,8 +1,10 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
 const morgan = require('morgan')
 const app = express()
+const mongoose = require('mongoose')
 
 // port
 const port = process.env.PORT || 8000
@@ -13,8 +15,19 @@ app.use(helmet())
 // handle CORS error
 app.use(cors())
 
-// Logger
-app.use(morgan('tiny'))
+// mongodb connection setup
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true })
+if (process.env.NODE_ENV !== 'production') {
+  // MONGO CONNECTION CHECK
+  mongoose.connection.on('open', () => {
+    console.log('MongoDB is connected')
+  })
+  mongoose.connection.on('error', (error) => {
+    console.log(error)
+  })
+  // Logger
+  app.use(morgan('tiny'))
+}
 
 // set body parser but remooved
 app.use(express.urlencoded({ extended: true }))

@@ -9,3 +9,17 @@ GET {{host}}/ticket HTTP/1.1
 
 ### random uri check 
 GET {{host}}/user/cdcdcdcv HTTP/1.1
+
+### user route creation for new ticket
+
+POST {{host}}/user HTTP/1.1
+Content-Type: application/json
+
+{"name":"kannada",
+  "message":"name is not defined",
+  "company":"company name",
+  "address":"somwhere in bangalore",
+  "phone":494561649162,
+  "email":"india@india.india.com",
+  "password":"india123"
+}
