@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const { insertUser } = require('../model/user/User.model')
+const { hashPassword } = require('../helpers/bcrypt.helper')
 
 router.all('/', (req, res, next) => {
   // console.log(name)
@@ -13,11 +14,20 @@ router.post('/', async (req, res) => {
   const { name, company, address, phone, email, password } = req.body
 
   try {
-// hashpassword
-const hashedPass = await hashedPassword(password)
+    // hashpassword
+    const hashedPass = await hashPassword(password)
 
-    const result = await insertUser(req.body)
-    console.log(req.body)
+    const newUserObject = {
+      name,
+      company,
+      address,
+      phone,
+      email,
+      password: hashedPass,
+    }
+
+    const result = await insertUser(newUserObject)
+    console.log(result)
     res.json({ message: 'New user created ', result })
   } catch (error) {
     console.log(error)

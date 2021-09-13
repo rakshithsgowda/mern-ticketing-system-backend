@@ -1,5 +1,12 @@
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 
-const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
-// Store hash in your password DB.
+const hashPassword = (plainPassword) => {
+  return new Promise((resolve) => {
+    resolve(bcrypt.hashSync(plainPassword, saltRounds))
+  })
+}
+
+module.exports = {
+  hashPassword,
+}
