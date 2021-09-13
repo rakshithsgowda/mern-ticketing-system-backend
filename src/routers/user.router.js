@@ -10,7 +10,12 @@ router.all('/', (req, res, next) => {
 })
 
 router.post('/', async (req, res) => {
+  const { name, company, address, phone, email, password } = req.body
+
   try {
+// hashpassword
+const hashedPass = await hashedPassword(password)
+
     const result = await insertUser(req.body)
     console.log(req.body)
     res.json({ message: 'New user created ', result })
