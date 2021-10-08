@@ -1,0 +1,23 @@
+@host= http://localhost:8000/v1/user
+
+### User signUp endpoint
+POST {{host}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "name":"kannada",
+  "message":"name is not defined",
+  "company":"company name",
+  "address":"somwhere in bangalore",
+  "phone":494561649162,
+  "email":"india@india.india.com",
+  "password":"india123"
+}
+### User signIN endpoint
+POST {{host}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email":"india@india.india.com",
+  "password":"india123"
+}
