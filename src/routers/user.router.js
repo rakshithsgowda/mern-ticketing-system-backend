@@ -5,12 +5,16 @@ const { insertUser } = require('../model/user/User.model')
 const { hashPassword } = require('../helpers/bcrypt.helper')
 const { json } = require('express')
 
+// ---------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------
 router.all('/', async (req, res, next) => {
   // console.log(name)
   // res.json({ message: 'return from user router' })
   next()
 })
 
+// ---------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------
 router.post('/', async (req, res) => {
   const { name, company, address, phone, email, password } = req.body
 
@@ -37,7 +41,9 @@ router.post('/', async (req, res) => {
   }
 })
 
+// ---------------------------------------------------------------------------------------
 // user Sign in endpoint
+// ---------------------------------------------------------------------------------------
 router.post('/login', (req, res) => {
   console.log(req.body)
   const { email, password } = req.body
@@ -51,4 +57,9 @@ router.post('/login', (req, res) => {
   res.json({ status: 'success', message: 'Login Successfully' })
 })
 
+// ---------------------------------------------------------------------------------------
+// user signin  Router
+// ---------------------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------------------
 module.exports = router
